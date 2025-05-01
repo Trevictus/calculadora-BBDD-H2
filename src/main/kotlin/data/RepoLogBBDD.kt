@@ -18,7 +18,7 @@ class RepoLogBBDD : IRepoLogBBDD {
     private lateinit var connection: Connection
     private lateinit var preparadorSentencias: PreparedStatement
 
-    private val url = "jdbc:h2:tcp://localhost/~/BBDD_CALCULADORA"
+    private val url = "jdbc:h2:file:./BBDD/BBDD_CALCULADORA"
     private val user = "sa"
     private val psswd = ""
 
