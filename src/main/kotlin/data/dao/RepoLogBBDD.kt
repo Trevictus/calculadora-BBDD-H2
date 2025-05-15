@@ -18,7 +18,6 @@ class RepoLogBBDD : IRepoLogBBDD {
     private lateinit var preparadorSentencias: PreparedStatement
 
 
-
     override fun getContenidoUltimoLog(): List<String> {
         val listaDatos: MutableList<String> = mutableListOf()
         var resultSet: ResultSet? = null
@@ -41,10 +40,14 @@ class RepoLogBBDD : IRepoLogBBDD {
             throw IllegalStateException("ERROR al intentar obtener de la base de datos. $e")
         } catch (e: Exception) {
             throw IllegalStateException("ERROR INESPERADO. $e")
-        } finally{
-            resultSet?.close()
-            preparadorSentencias.close()
-            DataBase.closeConnection()
+        } finally {
+            try {
+                resultSet?.close()
+                preparadorSentencias.close()
+                DataBase.closeConnection()
+            } catch (e: Exception){
+                throw IllegalStateException("ERROR DE CIERRE")
+            }
         }
         return listaDatos
     }
@@ -67,9 +70,13 @@ class RepoLogBBDD : IRepoLogBBDD {
             throw IllegalStateException("ERROR al insertar en la base de datos. $e")
         } catch (e: Exception) {
             throw IllegalStateException("ERROR INESPERADO. $e")
-        } finally{
-            preparadorSentencias.close()
-            DataBase.closeConnection()
+        } finally {
+            try {
+                preparadorSentencias.close()
+                DataBase.closeConnection()
+            } catch (e: Exception){
+                throw IllegalStateException("ERROR DE CIERRE")
+            }
         }
     }
 
@@ -92,11 +99,15 @@ class RepoLogBBDD : IRepoLogBBDD {
             throw IllegalStateException("ERROR clave repetida. $e")
         } catch (e: SQLException) {
             throw IllegalStateException("ERROR al insertar en la base de datos. $e")
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             throw IllegalStateException("ERROR INESPERADO. $e")
-        } finally{
-            preparadorSentencias.close()
-            DataBase.closeConnection()
+        } finally {
+            try {
+                preparadorSentencias.close()
+                DataBase.closeConnection()
+            } catch (e: Exception){
+                throw IllegalStateException("ERROR DE CIERRE")
+            }
         }
 
     }

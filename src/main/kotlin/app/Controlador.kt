@@ -31,29 +31,33 @@ class Controlador(
      * y el ciclo de operaciones interactivas con el usuario.
      */
     fun iniciar(args: Array<String>) {
-        modo = ui.preguntarModo()
-        if (modo) {
-            DataBase.getConnection()
+        try {
+            modo = ui.preguntarModo()
+            if (modo) {
+                DataBase.getConnection()
+            }
+
+            if (!procesarArgumentos(args)) return
+
+            if (modo) {
+
+                mostrarInfo(gestorBBDD.getInfoUltimoLog())
+
+                gestorBBDD.crearNuevoLog()
+            } else {
+                mostrarInfo(gestorLog.getInfoUltimoLog())
+
+                gestorLog.crearNuevoLog()
+            }
+            if (args.size == 4) ejecutarCalculoConArgumentos(args)
+
+            ui.pausar("Pulsa ENTER para iniciar la calculadora...")
+            ui.limpiarPantalla()
+
+            bucleCalculosUsuario()
+        } catch (e: IllegalStateException){
+            ui.mostrarError("${e.message}")
         }
-
-        if (!procesarArgumentos(args)) return
-
-        if (modo) {
-
-            mostrarInfo(gestorBBDD.getInfoUltimoLog())
-
-            gestorBBDD.crearNuevoLog()
-        } else {
-            mostrarInfo(gestorLog.getInfoUltimoLog())
-
-            gestorLog.crearNuevoLog()
-        }
-        if (args.size == 4) ejecutarCalculoConArgumentos(args)
-
-        ui.pausar("Pulsa ENTER para iniciar la calculadora...")
-        ui.limpiarPantalla()
-
-        bucleCalculosUsuario()
     }
 
     /**

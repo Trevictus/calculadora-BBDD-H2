@@ -1,6 +1,7 @@
 package es.prog2425.calclog.utils
 
 import java.io.File
+import java.io.IOException
 
 /**
  * Implementación de utilidad de gestión de archivos de texto basada en la API estándar de ficheros de Kotlin/Java.
@@ -20,6 +21,7 @@ class GestorFichTxt : IUtilFich {
      * Devuelve una lista con todos los ficheros contenidos en una ruta dada.
      */
     override fun listarFicheros(ruta: String) = File(ruta).listFiles()?.toList() ?: emptyList()
+
 
     /**
      * Lee el contenido completo de un archivo línea por línea.

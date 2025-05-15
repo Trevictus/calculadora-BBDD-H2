@@ -34,3 +34,11 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/arato/D
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 15 more
+2025-05-15 12:45:30.558256+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "LOS" no encontrada
+Table "LOS" not found; SQL statement:
+SELECT * FROM LOS, CALCULO WHERE LOGS.FECHA_LOG = CALCULO.FECHA_LOG AND LOGS.FECHA_LOG = (SELECT MAX(FECHA_LOG) FROM LOGS) ORDER BY FECHA_LOG DESC; [42102-232]
+2025-05-15 12:47:28.550542+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "LOS" no encontrada
+Table "LOS" not found; SQL statement:
+SELECT * FROM LOS, CALCULO WHERE LOGS.FECHA_LOG = CALCULO.FECHA_LOG AND LOGS.FECHA_LOG = (SELECT MAX(FECHA_LOG) FROM LOGS) ORDER BY FECHA_LOG DESC; [42102-232]
