@@ -2,8 +2,7 @@ package es.prog2425.calclog.data.dao
 
 import es.prog2425.calclog.data.db.DataBase
 import es.prog2425.calclog.model.Calculo
-import java.sql.Connection
-import java.sql.DriverManager
+
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -11,7 +10,7 @@ import java.sql.SQLIntegrityConstraintViolationException
 import java.time.LocalDateTime
 
 class RepoLogBBDD : IRepoLogBBDD {
-    object Fecha_log {
+    object FechaLog {
         val fecha_log = LocalDateTime.now().toString()
     }
 
@@ -58,7 +57,7 @@ class RepoLogBBDD : IRepoLogBBDD {
             preparadorSentencias = DataBase.getConnection().prepareStatement(insercionEnTabla)
             preparadorSentencias.setString(1, LocalDateTime.now().toString())
             preparadorSentencias.setString(2, mensaje)
-            preparadorSentencias.setString(3, Fecha_log.fecha_log)
+            preparadorSentencias.setString(3, FechaLog.fecha_log)
 
             preparadorSentencias.executeUpdate()
             preparadorSentencias.close()
@@ -84,11 +83,11 @@ class RepoLogBBDD : IRepoLogBBDD {
             val insercionEnTabla = "INSERT INTO LOGS (fecha_log) " +
                     "VALUES (?)"
             preparadorSentencias = DataBase.getConnection().prepareStatement(insercionEnTabla)
-            preparadorSentencias.setString(1, Fecha_log.fecha_log)
+            preparadorSentencias.setString(1, FechaLog.fecha_log)
 
             preparadorSentencias.executeUpdate()
             preparadorSentencias.close()
-            Fecha_log.fecha_log
+            FechaLog.fecha_log
         } catch (e: SQLIntegrityConstraintViolationException) {
             throw IllegalStateException("ERROR clave repetida. $e")
         } catch (e: SQLException) {

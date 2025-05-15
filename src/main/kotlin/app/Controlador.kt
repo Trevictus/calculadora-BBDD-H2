@@ -5,7 +5,6 @@ import es.prog2425.calclog.model.Operador
 import es.prog2425.calclog.service.IServicioBBDD
 import es.prog2425.calclog.service.ServicioCalc
 import es.prog2425.calclog.service.IServicioLog
-import es.prog2425.calclog.ui.Consola
 import es.prog2425.calclog.ui.IEntradaSalida
 
 /**
