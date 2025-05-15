@@ -1,6 +1,6 @@
 package es.prog2425.calclog.service
 
-import es.prog2425.calclog.data.IRepoLog
+import es.prog2425.calclog.data.dao.IRepoLog
 import es.prog2425.calclog.model.Calculo
 
 /**

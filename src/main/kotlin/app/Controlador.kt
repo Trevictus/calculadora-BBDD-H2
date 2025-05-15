@@ -1,5 +1,6 @@
 package es.prog2425.calclog.app
 
+import es.prog2425.calclog.data.db.DataBase
 import es.prog2425.calclog.model.Operador
 import es.prog2425.calclog.service.IServicioBBDD
 import es.prog2425.calclog.service.ServicioCalc
@@ -33,7 +34,7 @@ class Controlador(
     fun iniciar(args: Array<String>) {
         modo = ui.preguntarModo()
         if (modo) {
-            gestorBBDD.connect()
+            DataBase.getConnection()
         }
 
         if (!procesarArgumentos(args)) return
@@ -137,7 +138,7 @@ class Controlador(
         } while (ui.preguntar())
 
         if (modo) {
-            gestorBBDD.disconnect()
+            DataBase.closeConnection()
         }
         ui.limpiarPantalla()
     }

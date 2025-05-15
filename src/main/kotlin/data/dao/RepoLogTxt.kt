@@ -1,4 +1,4 @@
-package es.prog2425.calclog.data
+package es.prog2425.calclog.data.dao
 
 import es.prog2425.calclog.model.Calculo
 import es.prog2425.calclog.utils.IUtilFich

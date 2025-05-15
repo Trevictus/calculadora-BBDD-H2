@@ -1,14 +1,12 @@
-package es.prog2425.calclog.data
+package es.prog2425.calclog.data.dao
 
 import es.prog2425.calclog.model.Calculo
+import java.sql.Connection
 
-interface IRepoLog {
-    var ruta: String?
-    var logActual: String?
+interface IRepoLogBBDD {
 
-    fun crearRutaLog(): Boolean
-    fun crearNuevoLog(): String
     fun getContenidoUltimoLog(): List<String>
     fun registrarEntrada(mensaje: String)
     fun registrarEntrada(calculo: Calculo)
+    fun crearNuevoLog()
 }

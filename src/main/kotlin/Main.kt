@@ -2,10 +2,8 @@ package es.prog2425.calclog
 
 import es.prog2425.calclog.service.ServicioCalc
 import es.prog2425.calclog.app.Controlador
-import es.prog2425.calclog.data.IRepoLogBBDD
-import es.prog2425.calclog.data.RepoLogBBDD
-import es.prog2425.calclog.data.RepoLogTxt
-import es.prog2425.calclog.service.IServicioBBDD
+import es.prog2425.calclog.data.dao.RepoLogBBDD
+import es.prog2425.calclog.data.dao.RepoLogTxt
 import es.prog2425.calclog.service.ServicioBBDD
 import es.prog2425.calclog.service.ServicioLog
 import es.prog2425.calclog.ui.Consola
