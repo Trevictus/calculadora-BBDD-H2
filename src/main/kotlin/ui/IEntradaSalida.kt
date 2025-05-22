@@ -1,5 +1,8 @@
 package es.prog2425.calclog.ui
 
+/**
+* Interfaz que define los métodos de entrada y salida de información en la aplicaciónn.
+ */
 interface IEntradaSalida {
     fun mostrar(msj: String = "", salto: Boolean = true)
     fun mostrarError(msj: String, salto: Boolean = true)

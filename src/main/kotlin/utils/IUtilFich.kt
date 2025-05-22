@@ -2,6 +2,9 @@ package es.prog2425.calclog.utils
 
 import java.io.File
 
+/**
+ * Interfaz que define los métodos para la gestion de ficheros y rutas en el sistema de ficheros.
+ */
 interface IUtilFich {
     fun crearRuta(ruta: String): Boolean
     fun listarFicheros(ruta: String): List<File>

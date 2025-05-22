@@ -9,15 +9,28 @@ import java.sql.SQLException
 import java.sql.SQLIntegrityConstraintViolationException
 import java.time.LocalDateTime
 
+/**
+ * Implementación de la interfaz IRepoLogBBDD para gestionar registros en la base de datos.
+ */
 class RepoLogBBDD : IRepoLogBBDD {
+
+    /**
+     * Objeto que almacena la fecha del log actual.
+     */
     object FechaLog {
+        /** Fecha y hora actual como cadena de texto. */
         val fecha_log = LocalDateTime.now().toString()
     }
 
-
+    /** Instancia de PreparedStatement para ejecutar sentencias SQL. */
     private lateinit var preparadorSentencias: PreparedStatement
 
-
+    /**
+     * Obtiene el contenido del último log registrado en la base de datos.
+     *
+     * @return Lista de cadenas con los datos del último log.
+     * @throws IllegalStateException si ocurre un error en la consulta SQL.
+     */
     override fun getContenidoUltimoLog(): List<String> {
         val listaDatos: MutableList<String> = mutableListOf()
         var resultSet: ResultSet? = null
@@ -52,11 +65,15 @@ class RepoLogBBDD : IRepoLogBBDD {
         return listaDatos
     }
 
+    /**
+     * Registra una entrada en la tabla CALCULO con un mensaje.
+     *
+     * @param mensaje Mensaje a registrar.
+     * @throws IllegalStateException si ocurre un error al insertar en la base de datos.
+     */
     override fun registrarEntrada(mensaje: String) {
-
         try {
-            val insercionEnTabla = "INSERT INTO CALCULO (fecha, calculo, fecha_log) " +
-                    "VALUES (?,?,?)"
+            val insercionEnTabla = "INSERT INTO CALCULO (fecha, calculo, fecha_log) VALUES (?,?,?)"
             preparadorSentencias = DataBase.getConnection().prepareStatement(insercionEnTabla)
             preparadorSentencias.setString(1, LocalDateTime.now().toString())
             preparadorSentencias.setString(2, mensaje)
@@ -80,15 +97,23 @@ class RepoLogBBDD : IRepoLogBBDD {
         }
     }
 
+    /**
+     * Registra un cálculo en la tabla CALCULO.
+     *
+     * @param calculo Instancia de la clase Calculo a registrar.
+     */
     override fun registrarEntrada(calculo: Calculo) {
         registrarEntrada(calculo.toString())
     }
 
+    /**
+     * Crea un nuevo log en la tabla LOGS.
+     *
+     * @throws IllegalStateException si ocurre un error en la inserción de datos.
+     */
     override fun crearNuevoLog() {
-
         try {
-            val insercionEnTabla = "INSERT INTO LOGS (fecha_log) " +
-                    "VALUES (?)"
+            val insercionEnTabla = "INSERT INTO LOGS (fecha_log) VALUES (?)"
             preparadorSentencias = DataBase.getConnection().prepareStatement(insercionEnTabla)
             preparadorSentencias.setString(1, FechaLog.fecha_log)
 
@@ -109,6 +134,5 @@ class RepoLogBBDD : IRepoLogBBDD {
                 throw IllegalStateException("ERROR DE CIERRE")
             }
         }
-
     }
 }
